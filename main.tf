@@ -1,3 +1,9 @@
+
+#resource "google_project_service" "project" {
+#  project = var.project_id
+#  service =  "[var.gcp_services]"
+#}
+
 resource "google_compute_instance" "demo" {
   name         = "demo-instance"
   machine_type = "n1-standard-1"
@@ -31,6 +37,74 @@ resource "google_compute_firewall" "demo" {
     ports    = ["80"]
   }
   source_ranges = ["0.0.0.0/0"]
+}
+
+
+
+# Install Google Kubernetes Engine
+module "gke" {
+  source                     = "./modules/terraform-google-kubernetes-engine"
+  project_id                 = var.project_id
+  name                       = var.gke_cluster_name
+  region                     = var.region
+  zones                      = var.gke_zone
+  network                    = var.gke_network
+  subnetwork                 = var.gke_subnetwork
+  ip_range_pods              = var.range_pods_name
+  ip_range_services          = var.range_services_name
+  http_load_balancing        = false
+  horizontal_pod_autoscaling = true
+  network_policy             = true
+
+  node_pools = [
+    {
+      name               = var.node_pools_name
+      machine_type       = var.node_pools_machine_type
+      min_count          = var.node_pools_min_count
+      max_count          = var.node_pools_max_count
+      local_ssd_count    = 0
+      disk_size_gb       = var.node_pools_disk_size
+      disk_type          = "pd-standard"
+      image_type         = "COS"
+      auto_repair        = true
+      auto_upgrade       = true
+      service_account    = "gke-provision@jenkins-gke-0726-01.iam.gserviceaccount.com"
+      preemptible        = false
+      initial_node_count = var.initial_node_count
+    },
+  ]
+
+  node_pools_oauth_scopes = {
+    all = []
+
+    default-node-pool = [
+      "https://www.googleapis.com/auth/cloud-platform",
+    ]
+  }
+
+  node_pools_labels = {
+    all = {}
+
+    default-node-pool = {
+      default-node-pool = true
+    }
+  }
+
+  node_pools_metadata = {
+    all = {}
+
+    default-node-pool = {
+      node-pool-metadata-custom-value = "my-node-pool"
+    }
+  }
+
+  node_pools_tags = {
+    all = []
+
+    default-node-pool = [
+      "default-node-pool",
+    ]
+  }
 }
 
 # Install Jenkins
