@@ -25,7 +25,7 @@ resource "google_compute_instance" "demo" {
 }
 
 resource "google_compute_firewall" "demo" {
-  name    = "allow-demo-tcp-80"
+  name    = "allow-gce-tcp-80"
   network = "default"
   allow {
     protocol = "tcp"
