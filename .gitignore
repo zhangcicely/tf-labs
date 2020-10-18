@@ -50,4 +50,6 @@ crash.log
 credentials.json
 
 test/fixtures/*/ssh/key*.tfstate*
-.terraform
+
+creds/*
+.terraform/*
