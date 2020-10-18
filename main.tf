@@ -3,9 +3,9 @@ resource "google_compute_instance" "demo" {
   name         = "demo-instance-${count.index}"
   machine_type = "n1-standard-1"
   zone         = "us-west1-a"
-  metadata = {
-   ssh-keys = "ubuntu:${file("~/.ssh/google_compute_engine.pub")}"
-}
+#  metadata = {
+#   ssh-keys = "ubuntu:${file("~/.ssh/google_compute_engine.pub")}"
+#}
 
   # boot disk specifications
   boot_disk {
