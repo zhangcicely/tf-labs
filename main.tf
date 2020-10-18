@@ -71,7 +71,7 @@ output "demo_vm_ip" {
 #  value       = module.jenkins.jenkins_instance_initial_username
 #}
 
-output "jenkins_initial_password" {
+#output "jenkins_initial_password" {
 #  description = "The initial password assigned to Jenkins"
 #  value       = module.jenkins.jenkins_instance_initial_password
 #}
