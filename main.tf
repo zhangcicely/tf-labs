@@ -1,8 +1,8 @@
 resource "google_compute_instance" "demo" {
   count        = var.number_of_demo_instances
-  name         = "demo-instance-${count.index}"
-  machine_type = "n1-standard-1"
-  zone         = "us-west1-a"
+  name         = "jenkins-gce-instance-${count.index}"
+  machine_type = "e2-small"
+  zone         = "us-west2-a"
 #  metadata = {
 #   ssh-keys = "ubuntu:${file("~/.ssh/google_compute_engine.pub")}"
 #}
