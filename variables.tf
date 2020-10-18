@@ -9,6 +9,6 @@ variable "number_of_demo_instances" {
 }
 variable "project_id" {
   description = "Project to deploy resources"
-  default     = "student1gcp-istio"
+  default     = "jscloud-shell"
 }
  
