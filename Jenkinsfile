@@ -42,10 +42,8 @@ pipeline {
         ansiblePlaybook(
           playbook: 'playbook.yml',
           inventory: 'tf.gcp.yml',
-          credentialsId: 'ssh-key',
-          extraVars: [
-            login: 'jason'
-            ])
+          credentialsId: 'ssh-key'
+          )
       }
     }
   } 
