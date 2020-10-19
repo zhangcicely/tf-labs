@@ -36,7 +36,18 @@ pipeline {
           sh 'terraform apply -input=false myplan'
       }
     }
-
+    
+    stage('Run Ansible playbook') {
+      steps {
+        ansiblePlaybook(
+          playbook: 'playbook.yml',
+          inventory: 'tf.gcp.yml',
+          credentialsId: 'ssh-key',
+          extraVars: [
+            login: 'jason'
+            ])
+      }
+    }
   } 
 
 }

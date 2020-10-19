@@ -1,0 +1,15 @@
+plugin: gcp_compute
+projects:
+  - jscloud-shell
+auth_kind: serviceaccount
+service_account_file: /Users/jruels/Projects/tf-labs/creds/serviceaccount.json
+#regions:
+#  - us-west2
+filters: []
+#hostnames:
+#  - name
+keyed_groups:
+  - key: labels
+    prefix: label
+groups:
+  dev: "'gce-instance' in name"

@@ -1,0 +1,47 @@
+- name: Install Ansible Prereqs
+  hosts: dev
+  remote_user: jason
+  gather_facts: no
+  tasks:
+    - raw: "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y python-minimal python-pip"
+
+- name: Install Docker Prereqs
+  hosts: dev
+  remote_user: jason
+  gather_facts: yes
+  tasks:
+    - package:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+    - apt_key:
+        url: "https://download.docker.com/linux/ubuntu/gpg"
+        state: present
+    - apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+        state: present
+
+- name: Install Docker
+  hosts: dev
+  remote_user: jason
+  gather_facts: yes
+  handlers:
+    - import_tasks: roles/handlers/main.yml
+  tasks:
+    - package:
+        name: "docker-ce"
+        state: latest
+    - user: 
+        name: "{{ ansible_ssh_user }}"
+        groups: docker
+        append: yes
+      notify: restart docker
+
+- name: Install Docker Compose
+  hosts: tag_role_k8s_master:tag_role_k8s_member
+  roles:
+    - andrewrothstein.docker-compose
