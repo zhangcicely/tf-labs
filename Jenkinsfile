@@ -6,7 +6,7 @@ pipeline {
     SVC_ACCOUNT_KEY = credentials('tf-auth')
     DEFAULT_LOCAL_TMP = 'tmp/' 
     ANSIBLE_USER = 'jason'
-    HOME='/home/jenkins'
+    HOME='/tmp'
     
   }
 
