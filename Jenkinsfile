@@ -46,13 +46,14 @@ pipeline {
 
     stage('Run Ansible playbook') {
       steps {
-        ansiblePlaybook(
+        withCredentials([sshUserPrivateKey(credentialsId: ssh-key, keyFileVariable: KEY')]) {
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u jason'
+    }
+}
+/*        ansiblePlaybook(
           playbook: 'playbook.yml',
           inventory: 'tf.gcp.yml',
           credentialsId: 'ssh-key',
-          )
+          ) */
       }
     }
-  } 
-
-}
