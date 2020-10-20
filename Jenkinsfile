@@ -6,6 +6,7 @@ pipeline {
     SVC_ACCOUNT_KEY = credentials('tf-auth')
     DEFAULT_LOCAL_TMP = 'tmp/' 
     ANSIBLE_USER = 'jason'
+    HOME=/home/jenkins
     
   }
 
@@ -52,8 +53,9 @@ pipeline {
        steps {
          withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'KEY')]) {
           sh 'echo $DEFAULT_LOCAL_TMP'
+          sh 'echo $HOME'
           sh 'whoami'
-          sh 'ANSIBLE_LOCAL_TEMP=/tmp ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvvv playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvvv playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
     }
 }
        /*  ansiblePlaybook(
