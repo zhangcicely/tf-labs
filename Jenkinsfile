@@ -4,7 +4,7 @@ pipeline {
 
   environment {
     SVC_ACCOUNT_KEY = credentials('tf-auth')
-    DEFAULT_LOCAL_TMP = 'tmp/'
+    /*DEFAULT_LOCAL_TMP = 'tmp/' */
     
   }
 
