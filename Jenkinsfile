@@ -57,7 +57,8 @@ pipeline {
           playbook: 'playbook.yml',
           inventory: 'tf.gcp.yml',
           credentialsId: 'ssh-key',
-          installation: 'ansible'
+          installation: 'ansible',
+          becomeUser: 'root'
           ) 
       }
     }
