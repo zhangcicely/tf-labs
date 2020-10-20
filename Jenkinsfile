@@ -38,6 +38,12 @@ pipeline {
       }
     }
     
+    stage('Debug') {
+      steps {
+          sh 'echo $DEFAULT_LOCAL_TMP'
+      }
+    }
+
     stage('Run Ansible playbook') {
       steps {
         ansiblePlaybook(
