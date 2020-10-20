@@ -4,7 +4,8 @@ pipeline {
 
   environment {
     SVC_ACCOUNT_KEY = credentials('tf-auth')
-    DEFAULT_LOCAL_TMP = '/tmp/ansible'
+    DEFAULT_LOCAL_TMP = 'tmp/'
+    
   }
 
   stages {
