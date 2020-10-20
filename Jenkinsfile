@@ -41,6 +41,8 @@ pipeline {
     stage('Debug') {
       steps {
           sh 'echo $DEFAULT_LOCAL_TMP'
+          sh 'whoami'
+          sh 'echo $USER'
       }
     }
 
