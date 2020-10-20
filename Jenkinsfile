@@ -51,7 +51,9 @@ pipeline {
     stage('Run Ansible playbook') {
        steps {
          withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'KEY')]) {
-          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvvv playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
+          sh 'echo $DEFAULT_LOCAL_TMP'
+          sh 'whoami'
+          sh 'ANSIBLE_LOCAL_TEMP=/tmp ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -vvvv playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
     }
 }
        /*  ansiblePlaybook(
