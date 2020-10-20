@@ -5,6 +5,7 @@ pipeline {
   environment {
     SVC_ACCOUNT_KEY = credentials('tf-auth')
     /*DEFAULT_LOCAL_TMP = 'tmp/' */
+    ANSIBLE_USER = 'jason'
     
   }
 
@@ -49,18 +50,18 @@ pipeline {
 
     stage('Run Ansible playbook') {
        steps {
-/*         withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'KEY')]) {
-          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u jason'
+         withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'KEY')]) {
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
     }
-}*/
-        ansiblePlaybook(
+}
+       /*  ansiblePlaybook(
           playbook: 'playbook.yml',
           inventory: 'tf.gcp.yml',
           credentialsId: 'ssh-key',
           installation: 'ansible',
           becomeUser: 'root'
-          ) 
+          ) */
       }
     }
   }
-}
+//}
