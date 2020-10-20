@@ -41,7 +41,3 @@
         append: yes
       notify: restart docker
 
-- name: Install Docker Compose
-  hosts: tag_role_k8s_master:tag_role_k8s_member
-  roles:
-    - andrewrothstein.docker-compose

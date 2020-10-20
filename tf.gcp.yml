@@ -2,7 +2,7 @@ plugin: gcp_compute
 projects:
   - jscloud-shell
 auth_kind: serviceaccount
-service_account_file: /Users/jruels/Projects/tf-labs/creds/serviceaccount.json
+service_account_file: creds/serviceaccount.json
 #regions:
 #  - us-west2
 filters: []
@@ -12,4 +12,4 @@ keyed_groups:
   - key: labels
     prefix: label
 groups:
-  dev: "'gce-instance' in name"
+  dev: "'demo-instance' in name"
