@@ -12,4 +12,4 @@ keyed_groups:
   - key: labels
     prefix: label
 groups:
-  dev: "'test' in name"
+  dev: "'web-instance' in name"
