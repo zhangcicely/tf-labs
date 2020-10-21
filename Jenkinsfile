@@ -3,7 +3,7 @@ pipeline {
   agent any
 
   environment {
-    SVC_ACCOUNT_KEY = credentials('jenkins-gcp-cicd')
+    SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
     DEFAULT_LOCAL_TMP = 'tmp/' 
 //    ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
