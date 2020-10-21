@@ -52,18 +52,10 @@ pipeline {
       }
     }
 
-/*    stage('Install Pip modules') {
-      steps {
-          sh 'pip3 install google-auth'
-            sh 'pip3 install ansible'
-      }
-    } */
-
     stage('Run Ansible playbook') {
       steps {
-        sh 'pip3 install ansible google-auth'
         withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'cicd-ssh-key', keyFileVariable: 'KEY')]) {
-          sh 'ANSIBLE_HOST_KEY_CHECKING=False /tmp/.local/bin/ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
         }
 
       }
