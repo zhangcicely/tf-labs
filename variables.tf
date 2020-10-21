@@ -14,3 +14,4 @@ variable "project_id" {
  
 variable "jenkins_workers_project_id" {
   description = "Project for Jenkins worker agents"
+}
