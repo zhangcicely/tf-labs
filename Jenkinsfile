@@ -30,14 +30,12 @@ pipeline {
       steps {
         sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/0.13.4/terraform_0.13.4_linux_amd64.zip"
         sh "unzip terraform.zip"
-        sh "sudo mv terraform /usr/bin"
-        sh "rm -rf terraform.zip"
       }
     }
     stage('TF Plan') {
       steps {
-          sh 'terraform init -reconfigure'
-          sh 'terraform plan -var project_id=$PROJECT_ID -var jenkins_workers_project_id=$PROJECT_ID -out myplan'
+          sh './terraform init -reconfigure'
+          sh './terraform plan -var project_id=$PROJECT_ID -var jenkins_workers_project_id=$PROJECT_ID -out myplan'
         }
     }
 
@@ -51,7 +49,7 @@ pipeline {
 
     stage('TF Apply') {
       steps {
-          sh 'terraform apply -input=false myplan'
+          sh './terraform apply -input=false myplan'
       }
     }
     
