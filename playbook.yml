@@ -16,7 +16,6 @@
 
 - name: Install Docker
   hosts: dev
-  remote_user: jason
   gather_facts: yes
   handlers:
     - import_tasks: roles/handlers/main.yml
