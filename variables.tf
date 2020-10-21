@@ -9,7 +9,6 @@ variable "number_of_demo_instances" {
 }
 variable "project_id" {
   description = "Project to deploy resources"
-  default     = "jscloud-shell"
 }
  
 variable "jenkins_workers_project_id" {

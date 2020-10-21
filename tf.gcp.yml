@@ -1,6 +1,6 @@
 plugin: gcp_compute
 projects:
-  - instructor-20201020-student1xi
+  - student1gcp-istio
 auth_kind: serviceaccount
 service_account_file: creds/jenkins-sa.json
 filters: []

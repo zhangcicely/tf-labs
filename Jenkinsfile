@@ -4,7 +4,7 @@ pipeline {
 
   environment {
     SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
-    PROJECT_ID = "instructor-20201020-student1xi"
+    PROJECT_ID = "student1gcp-istio"
     DEFAULT_LOCAL_TMP = 'tmp/' 
     ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
@@ -22,7 +22,7 @@ pipeline {
       steps {
         checkout scm
         sh 'mkdir -p creds' 
-        sh 'echo $SVC_ACCOUNT_KEY | base64 -di > ./creds/serviceaccount.json'
+        sh 'echo $SVC_ACCOUNT_KEY | base64 -di > ./creds/jenkins-sa.json'
       }
     }
     
