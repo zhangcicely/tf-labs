@@ -4,9 +4,9 @@ pipeline {
 
   environment {
     SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
-    PROJECT_ID = "instructor-20201020-student1xi-tfstate"
+    PROJECT_ID = "instructor-20201020-student1xi"
     DEFAULT_LOCAL_TMP = 'tmp/' 
-//    ANSIBLE_USER = 'ubuntu'
+    ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
     
   }
@@ -42,20 +42,15 @@ pipeline {
       }
     }
     
-    stage('Debug') {
+    stage('Install Pip modules') {
       steps {
-          sh 'echo $DEFAULT_LOCAL_TMP'
-          sh 'whoami'
-          sh 'echo $USER'
+          sh 'pip3 install google-auth'
       }
     }
 
     stage('Run Ansible playbook') {
        steps {
          withCredentials([sshUserPrivateKey(credentialsId: 'cicd-ssh-key', keyFileVariable: 'KEY')]) {
-          sh 'echo $DEFAULT_LOCAL_TMP'
-          sh 'echo $HOME'
-          sh 'whoami'
           sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
       }
     }

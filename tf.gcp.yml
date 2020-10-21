@@ -1,13 +1,9 @@
 plugin: gcp_compute
 projects:
-  - jscloud-shell
+  - instructor-20201020-student1xi
 auth_kind: serviceaccount
 service_account_file: creds/serviceaccount.json
-#regions:
-#  - us-west2
 filters: []
-#hostnames:
-#  - name
 keyed_groups:
   - key: labels
     prefix: label
