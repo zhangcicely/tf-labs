@@ -4,7 +4,7 @@ resource "google_compute_instance" "demo" {
   machine_type = "e2-small"
   zone         = "us-west1-a"
   metadata = {
-   ssh-keys = "ubuntu:${file("~/.ssh/tf-key.pub")}"
+   ssh-keys = "ubuntu:${file("/opt/bitnami/jenkins/jenkins_home/tf-key.pub")}"
 }
 
   # boot disk specifications

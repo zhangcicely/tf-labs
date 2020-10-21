@@ -4,6 +4,7 @@ pipeline {
 
   environment {
     SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
+    PROJECT_ID = "instructor-20201020-student1xi-tfstate"
     DEFAULT_LOCAL_TMP = 'tmp/' 
 //    ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
@@ -22,8 +23,8 @@ pipeline {
 
     stage('TF Plan') {
       steps {
-          sh 'terraform init'
-          sh 'terraform plan -out myplan'
+          sh 'terraform init -reconfigure'
+          sh 'terraform plan -var project_id=$PROJECT_ID -var jenkins_workers_project_id=$PROJECT_ID -out myplan'
         }
     }
 
