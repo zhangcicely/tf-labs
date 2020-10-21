@@ -3,9 +3,9 @@ pipeline {
   agent any
 
   environment {
-    SVC_ACCOUNT_KEY = credentials('tf-auth')
+    SVC_ACCOUNT_KEY = credentials('jenkins-gcp-cicd')
     DEFAULT_LOCAL_TMP = 'tmp/' 
-    ANSIBLE_USER = 'jason'
+#    ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
     
   }
@@ -51,21 +51,13 @@ pipeline {
 
     stage('Run Ansible playbook') {
        steps {
-         withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'KEY')]) {
+         withCredentials([sshUserPrivateKey(credentialsId: 'cicd-ssh-key', keyFileVariable: 'KEY')]) {
           sh 'echo $DEFAULT_LOCAL_TMP'
           sh 'echo $HOME'
           sh 'whoami'
           sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook playbook.yml -i tf.gcp.yml --private-key ${KEY} -b -u $ANSIBLE_USER'
-    }
-}
-       /*  ansiblePlaybook(
-          playbook: 'playbook.yml',
-          inventory: 'tf.gcp.yml',
-          credentialsId: 'ssh-key',
-          installation: 'ansible',
-          becomeUser: 'root'
-          ) */
       }
     }
+   }
   }
-//}
+ }
