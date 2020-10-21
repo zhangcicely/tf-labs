@@ -1,5 +1,13 @@
 pipeline {
   agent any
+  environment {
+    SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
+      PROJECT_ID = 'student1gcp-istio'
+      DEFAULT_LOCAL_TMP = 'tmp/'
+      ANSIBLE_USER = 'ubuntu'
+      HOME = '/tmp'
+  }
+
   stages {
     stage('Cleanup') {
       steps {
@@ -46,12 +54,8 @@ pipeline {
 
     stage('Install Pip modules') {
       steps {
-<<<<<<< HEAD
           sh 'pip3 install google-auth'
             sh 'pip3 install ansible'
-=======
-        sh 'pip3 install google-auth'
->>>>>>> bf0195e453ae4aa4b3a9cacf2cb1977bddaf60b4
       }
     }
 
@@ -64,12 +68,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    SVC_ACCOUNT_KEY = credentials('jenkins-gcp')
-    PROJECT_ID = 'student1gcp-istio'
-    DEFAULT_LOCAL_TMP = 'tmp/'
-    ANSIBLE_USER = 'ubuntu'
-    HOME = '/tmp'
   }
 }
