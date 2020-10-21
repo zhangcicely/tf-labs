@@ -12,6 +12,12 @@ pipeline {
 
   stages {
 
+    stage('Cleanup') {
+      steps {
+        cleanWs deleteDirs: true
+      }
+    }
+
     stage('Checkout') {
       steps {
         checkout scm
@@ -19,7 +25,15 @@ pipeline {
         sh 'echo $SVC_ACCOUNT_KEY | base64 -di > ./creds/serviceaccount.json'
       }
     }
-
+    
+    stage('Install Terraform') {
+      steps {
+        sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/0.13.4/terraform_0.13.4_linux_amd64.zip"
+        sh "unzip terraform.zip"
+        sh "sudo mv terraform /usr/bin"
+        sh "rm -rf terraform.zip"
+      }
+    }
     stage('TF Plan') {
       steps {
           sh 'terraform init -reconfigure'
