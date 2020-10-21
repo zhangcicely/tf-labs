@@ -12,3 +12,5 @@ variable "project_id" {
   default     = "jscloud-shell"
 }
  
+variable "jenkins_workers_project_id" {
+  description = "Project for Jenkins worker agents"
