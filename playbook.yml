@@ -29,3 +29,15 @@
         append: yes
       notify: restart docker
 
+- name: Install Docker Prereqs
+  hosts: dev
+  gather_facts: yes
+  tasks:
+  - package:
+      name: "{{item}}"
+      state: latest
+    with_items:
+      - curl
+      - rolldice
+      - vim-nox
+ 
