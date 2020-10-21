@@ -56,6 +56,7 @@ pipeline {
     stage('Install Pip modules') {
       steps {
           sh 'pip3 install google-auth'
+            sh 'pip3 install ansible'
       }
     }
 
