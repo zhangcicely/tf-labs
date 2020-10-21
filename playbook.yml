@@ -1,6 +1,5 @@
 - name: Install Docker Prereqs
   hosts: dev
-  remote_user: jason
   gather_facts: yes
   tasks:
     - package:

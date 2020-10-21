@@ -8,7 +8,6 @@ pipeline {
     DEFAULT_LOCAL_TMP = 'tmp/' 
     ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
-    
   }
 
   stages {
