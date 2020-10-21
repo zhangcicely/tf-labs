@@ -5,7 +5,7 @@ pipeline {
   environment {
     SVC_ACCOUNT_KEY = credentials('jenkins-gcp-cicd')
     DEFAULT_LOCAL_TMP = 'tmp/' 
-#    ANSIBLE_USER = 'ubuntu'
+//    ANSIBLE_USER = 'ubuntu'
     HOME='/tmp'
     
   }
